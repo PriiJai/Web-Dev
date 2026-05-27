@@ -1,0 +1,1767 @@
+cat > /mnt/user-data/outputs/nitratechs_final.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nitra Technology — One Stop IT Solutions</title>
+<link rel="icon" href="https://www.nitratechs.com/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --bg:       #06090F;
+  --bg2:      #0A1020;
+  --surface:  rgba(255,255,255,0.042);
+  --rim:      rgba(255,255,255,0.075);
+  --rim2:     rgba(255,255,255,0.13);
+  --text:     #EEF2F8;
+  --muted:    rgba(210,225,248,0.48);
+  --accent:   #1A6EFF;
+  --accent2:  #5FA8FF;
+  --gold:     #FFD166;
+  --r:        16px;
+  --r2:       24px;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:'Outfit',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── GRAIN OVERLAY ─────────────────────────────────────────── */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:9999;
+  pointer-events:none;
+  opacity:.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+
+/* ─── CURSOR ─────────────────────────────────────────────────── */
+.cursor {
+  position:fixed; z-index:10000; pointer-events:none;
+  width:10px; height:10px;
+  background:var(--accent);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width .22s, height .22s, opacity .2s;
+  mix-blend-mode:difference;
+}
+.cursor-ring {
+  position:fixed; z-index:9999; pointer-events:none;
+  width:38px; height:38px;
+  border:1.5px solid rgba(26,110,255,0.48);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:transform .18s ease, width .22s, height .22s;
+}
+
+/* ─── NAV ────────────────────────────────────────────────────── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  display:flex; align-items:center;
+  padding:0 52px; height:70px;
+  background:rgba(6,9,15,0.82);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--rim);
+  transition:box-shadow .3s;
+}
+nav.scrolled { box-shadow:0 4px 40px rgba(0,0,0,0.6); }
+
+.nav-logo {
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none; flex-shrink:0;
+}
+.nav-logo-img {
+  height:38px; width:auto;
+  object-fit:contain;
+  border-radius:6px;
+  filter:brightness(1.05);
+}
+.nav-logo-fallback {
+  width:36px; height:36px; border-radius:9px;
+  background:var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:20px; color:white;
+  flex-shrink:0;
+}
+.nav-logo-text {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px; letter-spacing:0.07em;
+  color:var(--text);
+}
+
+.nav-links {
+  list-style:none; display:flex; gap:30px;
+  margin-left:auto; align-items:center;
+}
+.nav-links a {
+  font-size:13.5px; font-weight:500;
+  color:var(--muted); text-decoration:none;
+  letter-spacing:0.02em; transition:color .2s;
+  position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:100%;
+  height:1.5px; background:var(--accent);
+  transition:right .25s ease;
+}
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { right:0; }
+
+.nav-has-drop { position:relative; }
+.nav-drop {
+  position:absolute; top:calc(100% + 14px); left:50%;
+  transform:translateX(-50%) translateY(6px);
+  background:rgba(6,9,15,0.97);
+  border:1px solid var(--rim2);
+  border-radius:var(--r); padding:8px 0; min-width:215px;
+  opacity:0; pointer-events:none;
+  transition:all .2s ease;
+  backdrop-filter:blur(20px); z-index:100;
+}
+.nav-has-drop:hover .nav-drop {
+  opacity:1; pointer-events:all; transform:translateX(-50%) translateY(0);
+}
+.nav-drop a {
+  display:block; padding:9px 18px;
+  font-size:13px; color:var(--muted);
+  transition:color .15s, background .15s;
+}
+.nav-drop a::after { display:none; }
+.nav-drop a:hover { color:var(--text); background:rgba(26,110,255,0.10); }
+
+.nav-cta {
+  margin-left:24px;
+  display:inline-flex; align-items:center; gap:7px;
+  padding:9px 22px; border-radius:40px;
+  background:var(--accent); color:white;
+  font-size:13.5px; font-weight:700;
+  text-decoration:none; letter-spacing:0.02em;
+  box-shadow:0 0 26px rgba(26,110,255,0.42);
+  transition:all .22s;
+}
+.nav-cta:hover {
+  transform:translateY(-2px);
+  box-shadow:0 0 44px rgba(26,110,255,0.65);
+}
+
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero {
+  min-height:100vh;
+  display:flex; align-items:center;
+  padding:70px 0 0;
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(ellipse 75% 65% at 65% 45%, #091535 0%, var(--bg) 70%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(26,110,255,0.06) 0%, transparent 70%);
+}
+
+/* animated grid lines */
+.hero-grid {
+  position:absolute; inset:0; z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(26,110,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,110,255,0.035) 1px, transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 70% 70% at 60% 50%, black 0%, transparent 80%);
+  animation:gridDrift 20s ease-in-out infinite alternate;
+}
+@keyframes gridDrift {
+  0%  { background-position:0 0, 0 0; }
+  100%{ background-position:10px 10px, 10px 10px; }
+}
+
+/* concentric rings */
+.rings {
+  position:absolute;
+  right:-4vw; top:50%; transform:translateY(-52%);
+  width:72vmin; height:72vmin;
+  pointer-events:none; z-index:0;
+}
+.ring {
+  position:absolute; border-radius:50%;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  animation:ringPulse 7s ease-in-out infinite;
+}
+.ring:nth-child(1)  { width:14%;  height:14%; border:1.5px solid rgba(26,110,255,0.55); animation-delay:0s; }
+.ring:nth-child(2)  { width:27%;  height:27%; border:1px solid rgba(26,110,255,0.38); animation-delay:.5s; }
+.ring:nth-child(3)  { width:42%;  height:42%; border:1px solid rgba(26,110,255,0.24); animation-delay:1s; }
+.ring:nth-child(4)  { width:58%;  height:58%; border:1px solid rgba(26,110,255,0.15); animation-delay:1.5s; }
+.ring:nth-child(5)  { width:76%;  height:76%; border:1px solid rgba(26,110,255,0.09); animation-delay:2s; }
+.ring:nth-child(6)  { width:100%; height:100%; border:1px solid rgba(26,110,255,0.05); animation-delay:2.5s; }
+/* orbiting dot */
+.ring:nth-child(2)::after {
+  content:''; position:absolute; width:8px; height:8px;
+  border-radius:50%; background:var(--accent);
+  box-shadow:0 0 14px var(--accent);
+  top:-4px; left:50%; transform:translateX(-50%);
+  animation:orbitDot 8s linear infinite;
+  transform-origin:center 50%;
+}
+@keyframes orbitDot {
+  from { transform:translateX(-50%) rotate(0deg) translateY(0); }
+  to   { transform:translateX(-50%) rotate(360deg) translateY(0); }
+}
+
+@keyframes ringPulse {
+  0%,100% { opacity:1; }
+  50%      { opacity:.45; }
+}
+
+/* hero character SVG */
+.char-wrap {
+  position:absolute;
+  right:7vw; bottom:0;
+  width:340px; height:540px;
+  z-index:2; pointer-events:none;
+  animation:charFloat 5s ease-in-out infinite;
+}
+@keyframes charFloat {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-20px); }
+}
+.char-svg { width:100%; height:100%; }
+.char-glow {
+  position:absolute; bottom:-40px; left:50%; transform:translateX(-50%);
+  width:260px; height:80px;
+  background:radial-gradient(ellipse, rgba(26,110,255,0.40) 0%, transparent 70%);
+  filter:blur(24px);
+}
+
+/* hero text */
+.hero-inner {
+  position:relative; z-index:3;
+  max-width:1240px; margin:0 auto;
+  padding:100px 52px;
+  width:100%;
+}
+
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11.5px; font-weight:600;
+  letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--accent2);
+  margin-bottom:30px;
+  padding:7px 16px;
+  border:1px solid rgba(26,110,255,0.28);
+  border-radius:40px;
+  background:rgba(26,110,255,0.07);
+  animation:fadeSlideUp .8s ease both;
+}
+.hero-eyebrow-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px var(--accent);
+  animation:blink 1.8s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+@keyframes fadeSlideUp {
+  from{opacity:0;transform:translateY(20px);}
+  to  {opacity:1;transform:translateY(0);}
+}
+
+.hero-h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(60px,9vw,122px);
+  line-height:.92;
+  letter-spacing:0.02em;
+  color:var(--text);
+  max-width:680px;
+  margin-bottom:28px;
+  animation:fadeSlideUp .8s .1s ease both;
+}
+.hero-h1 .accent-word {
+  color:var(--accent);
+  display:inline-block;
+  position:relative;
+}
+.hero-h1 .accent-word::before,
+.hero-h1 .accent-word::after {
+  content:attr(data-text);
+  position:absolute; top:0; left:0;
+  color:var(--accent);
+}
+.hero-h1 .accent-word::before {
+  left:2px; color:#7EC8FF; opacity:0.65;
+  clip-path:polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  animation:glitch1 5s infinite;
+}
+.hero-h1 .accent-word::after {
+  left:-2px; color:var(--accent2); opacity:0.55;
+  clip-path:polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  animation:glitch2 5s infinite;
+}
+@keyframes glitch1 {
+  0%,88%,100%{transform:translateX(0);opacity:0;}
+  90%{transform:translateX(-3px);opacity:0.65;}
+  94%{transform:translateX(3px);opacity:0.4;}
+  96%{transform:translateX(0);opacity:0;}
+}
+@keyframes glitch2 {
+  0%,86%,100%{transform:translateX(0);opacity:0;}
+  88%{transform:translateX(3px);opacity:0.55;}
+  92%{transform:translateX(-2px);opacity:0.35;}
+  95%{transform:translateX(0);opacity:0;}
+}
+
+.hero-sub {
+  font-size:17px; font-weight:300;
+  color:var(--muted); line-height:1.72;
+  max-width:430px; margin-bottom:44px;
+  animation:fadeSlideUp .8s .2s ease both;
+}
+
+.hero-btns {
+  display:flex; gap:14px; flex-wrap:wrap;
+  margin-bottom:64px;
+  animation:fadeSlideUp .8s .3s ease both;
+}
+
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:13px 28px; border-radius:50px;
+  font-family:'Outfit',sans-serif;
+  font-size:14px; font-weight:700;
+  text-decoration:none; cursor:none;
+  transition:all .24s; border:none;
+  letter-spacing:0.02em;
+}
+.btn-accent {
+  background:var(--accent); color:white;
+  box-shadow:0 0 32px rgba(26,110,255,0.40);
+}
+.btn-accent:hover {
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 0 56px rgba(26,110,255,0.65);
+}
+.btn-outline {
+  background:transparent; color:var(--text);
+  border:1.5px solid var(--rim2);
+}
+.btn-outline:hover {
+  border-color:rgba(255,255,255,0.32);
+  background:var(--surface);
+  transform:translateY(-2px);
+}
+
+/* hero stats */
+.hero-stats {
+  display:flex; gap:0;
+  border:1px solid var(--rim2);
+  border-radius:var(--r);
+  overflow:hidden;
+  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,0.025);
+  max-width:480px;
+  animation:fadeSlideUp .8s .4s ease both;
+}
+.hstat {
+  flex:1; padding:20px 22px;
+  border-right:1px solid var(--rim);
+  text-align:center;
+  position:relative;
+}
+.hstat:last-child { border-right:none; }
+.hstat::before {
+  content:''; position:absolute; bottom:0; left:50%;
+  transform:translateX(-50%);
+  width:0; height:2px; background:var(--accent);
+  transition:width .35s;
+}
+.hstat:hover::before { width:70%; }
+.hstat-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px; line-height:1; color:var(--text);
+  margin-bottom:4px;
+}
+.hstat-num span { color:var(--accent); font-size:24px; }
+.hstat-label { font-size:11px; color:var(--muted); letter-spacing:0.04em; }
+
+/* floating info cards */
+.brand-row {
+  position:absolute; bottom:40px; right:52px;
+  display:flex; gap:14px; z-index:4;
+}
+.brand-card {
+  background:rgba(255,255,255,0.055);
+  border:1px solid var(--rim2);
+  border-radius:var(--r);
+  padding:14px 18px;
+  backdrop-filter:blur(20px);
+  display:flex; align-items:center; gap:12px;
+  font-size:13px; font-weight:600; color:var(--text);
+  transition:all .22s; min-width:150px;
+  animation:fadeSlideUp .8s ease both;
+}
+.brand-card:nth-child(1) { animation-delay:.5s; }
+.brand-card:nth-child(2) { animation-delay:.65s; }
+.brand-card:nth-child(3) { animation-delay:.8s; }
+.brand-card:hover {
+  border-color:rgba(26,110,255,0.42);
+  background:rgba(26,110,255,0.10);
+  transform:translateY(-3px);
+}
+.brand-icon {
+  width:36px; height:36px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.bi-net { background:linear-gradient(135deg,#1A6EFF,#0A40B0); }
+.bi-sec { background:linear-gradient(135deg,#10B981,#065F46); }
+.bi-srv { background:linear-gradient(135deg,#8B5CF6,#5B21B6); }
+.brand-card-sub { font-size:10px; color:var(--muted); font-weight:400; }
+
+/* ─── SECTION BASE ───────────────────────────────────────────── */
+section { padding:110px 52px; }
+.wrap { max-width:1240px; margin:0 auto; }
+
+.tag {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:700; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:16px;
+}
+.tag::before { content:''; width:20px; height:1.5px; background:var(--accent); border-radius:2px; }
+
+.sec-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(40px,5.5vw,72px);
+  line-height:.96; letter-spacing:0.02em;
+  color:var(--text); margin-bottom:18px;
+}
+.sec-title span { color:var(--accent); }
+.sec-sub {
+  font-size:16px; font-weight:300;
+  color:var(--muted); line-height:1.74;
+  max-width:500px;
+}
+
+/* ─── TICKER ─────────────────────────────────────────────────── */
+.ticker-wrap {
+  border-top:1px solid var(--rim);
+  border-bottom:1px solid var(--rim);
+  overflow:hidden; padding:16px 0;
+  background:rgba(255,255,255,0.018);
+}
+.ticker-track {
+  display:inline-flex; gap:0; white-space:nowrap;
+  animation:scroll 26s linear infinite;
+}
+.ticker-item {
+  display:inline-flex; align-items:center; gap:12px;
+  padding:0 40px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:17px; letter-spacing:0.06em; color:var(--muted);
+}
+.ticker-item span { color:var(--accent); font-size:20px; }
+@keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ─── SERVICES ───────────────────────────────────────────────── */
+#services { background:var(--bg2); }
+
+.services-header {
+  display:flex; align-items:flex-end;
+  justify-content:space-between; margin-bottom:60px;
+  gap:24px; flex-wrap:wrap;
+}
+
+.svc-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.svc-card {
+  background:var(--surface);
+  border:1px solid var(--rim);
+  border-radius:var(--r2);
+  padding:36px 30px;
+  position:relative; overflow:hidden;
+  text-decoration:none; color:inherit;
+  display:block; transition:all .3s ease;
+}
+.svc-card::before {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(26,110,255,0.13) 0%, transparent 60%);
+  opacity:0; transition:opacity .3s;
+}
+.svc-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity:0; transition:opacity .35s;
+}
+.svc-card:hover { border-color:rgba(26,110,255,0.40); transform:translateY(-7px); box-shadow:0 24px 60px rgba(0,0,0,0.5); }
+.svc-card:hover::before { opacity:1; }
+.svc-card:hover::after  { opacity:1; }
+.svc-card:hover .svc-arrow { opacity:1; transform:rotate(0deg) translate(2px,-2px); }
+.svc-card:hover .svc-num   { color:var(--accent); }
+
+.svc-top {
+  display:flex; align-items:flex-start;
+  justify-content:space-between; margin-bottom:24px;
+}
+.svc-icon {
+  width:54px; height:54px; border-radius:14px;
+  background:rgba(26,110,255,0.12);
+  border:1px solid rgba(26,110,255,0.28);
+  display:flex; align-items:center; justify-content:center;
+  position:relative; z-index:1;
+}
+.svc-icon svg { width:26px; height:26px; }
+.svc-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px; color:rgba(255,255,255,0.20);
+  letter-spacing:0.08em; transition:color .3s;
+}
+.svc-arrow {
+  position:absolute; top:28px; right:28px;
+  width:32px; height:32px; border-radius:50%;
+  background:var(--accent); color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; opacity:0;
+  transform:rotate(45deg); transition:all .28s; z-index:1;
+}
+.svc-name {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px; letter-spacing:0.04em;
+  color:var(--text); margin-bottom:10px; position:relative; z-index:1;
+}
+.svc-desc {
+  font-size:13.5px; color:var(--muted);
+  line-height:1.65; position:relative; z-index:1;
+}
+.svc-tags {
+  display:flex; flex-wrap:wrap; gap:6px;
+  margin-top:20px; position:relative; z-index:1;
+}
+.svc-tag {
+  font-size:11px; padding:3px 10px; border-radius:20px;
+  background:rgba(255,255,255,0.055);
+  border:1px solid var(--rim); color:var(--muted);
+}
+
+/* ─── STATS BAND ─────────────────────────────────────────────── */
+.stats-band {
+  padding:0 52px; background:var(--bg2);
+  border-top:1px solid var(--rim); border-bottom:1px solid var(--rim);
+}
+.stats-band-inner {
+  max-width:1240px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(4,1fr);
+}
+.sband-item {
+  padding:56px 20px; text-align:center;
+  border-right:1px solid var(--rim);
+  position:relative; overflow:hidden; transition:background .3s;
+}
+.sband-item:last-child { border-right:none; }
+.sband-item:hover { background:rgba(26,110,255,0.05); }
+.sband-item::before {
+  content:''; position:absolute; bottom:0; left:50%;
+  transform:translateX(-50%);
+  width:0; height:2px; background:var(--accent);
+  transition:width .35s;
+}
+.sband-item:hover::before { width:60%; }
+.sband-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:68px; line-height:1; color:var(--text);
+  margin-bottom:6px;
+}
+.sband-num sup { font-size:32px; color:var(--accent); }
+.sband-label { font-size:13px; color:var(--muted); letter-spacing:0.04em; }
+
+/* ─── ABOUT ──────────────────────────────────────────────────── */
+#about {
+  background:var(--bg);
+  position:relative; overflow:hidden;
+}
+#about::before {
+  content:''; position:absolute; right:-180px; top:-180px;
+  width:650px; height:650px;
+  background:radial-gradient(circle, rgba(26,110,255,0.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+
+.about-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center;
+}
+.about-visual { position:relative; }
+
+.about-big-card {
+  background:linear-gradient(135deg, rgba(10,20,50,0.92) 0%, rgba(6,9,15,0.88) 100%);
+  border:1px solid var(--rim2);
+  border-radius:28px; padding:52px;
+  backdrop-filter:blur(20px);
+  position:relative; overflow:hidden;
+  min-height:480px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  box-shadow:0 32px 80px rgba(0,0,0,0.50);
+}
+.about-big-card::after {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:280px; height:280px;
+  background:radial-gradient(circle, rgba(26,110,255,0.24) 0%, transparent 70%);
+  pointer-events:none;
+}
+.about-tagline {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:52px; line-height:.95; letter-spacing:0.02em;
+  color:var(--text); margin-bottom:20px;
+}
+.about-tagline span { color:var(--accent); }
+.about-body {
+  font-size:15px; color:var(--muted); line-height:1.76; font-weight:300;
+}
+
+.about-stats-row {
+  display:flex; gap:0;
+  border:1px solid var(--rim); border-radius:var(--r); overflow:hidden;
+  position:relative; z-index:1;
+  margin-top:32px;
+}
+.astat { flex:1; padding:18px 16px; text-align:center; border-right:1px solid var(--rim); }
+.astat:last-child { border-right:none; }
+.astat-num {
+  font-family:'Bebas Neue',sans-serif; font-size:34px; color:var(--text);
+  line-height:1; margin-bottom:4px;
+}
+.astat-num span { color:var(--accent); }
+.astat-label { font-size:11px; color:var(--muted); }
+
+.float-chip {
+  position:absolute;
+  background:rgba(6,9,15,0.94);
+  border:1px solid var(--rim2); border-radius:var(--r);
+  padding:14px 18px; backdrop-filter:blur(20px);
+  font-size:13px; font-weight:600; color:var(--text);
+  white-space:nowrap; display:flex; align-items:center; gap:10px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.50);
+  animation:chipFloat 4s ease-in-out infinite;
+}
+@keyframes chipFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+.fc-top { top:-24px; right:-28px; }
+.fc-bot { bottom:30px; left:-28px; animation-delay:1.5s; }
+.fc-icon { font-size:20px; }
+.fc-sub { font-size:11px; color:var(--muted); font-weight:400; }
+
+/* feature list */
+.feat-list { display:flex; flex-direction:column; gap:16px; }
+.feat-item {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:20px 22px; border:1px solid var(--rim);
+  border-radius:var(--r); background:var(--surface);
+  transition:all .22s;
+}
+.feat-item:hover {
+  border-color:rgba(26,110,255,0.38);
+  background:rgba(26,110,255,0.06);
+  transform:translateX(6px);
+}
+.feat-ico {
+  width:44px; height:44px; flex-shrink:0;
+  border-radius:12px;
+  background:rgba(26,110,255,0.12);
+  border:1px solid rgba(26,110,255,0.28);
+  display:flex; align-items:center; justify-content:center;
+}
+.feat-ico svg { width:22px; height:22px; }
+.feat-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px; letter-spacing:0.04em;
+  color:var(--text); margin-bottom:4px;
+}
+.feat-body { font-size:13.5px; color:var(--muted); line-height:1.6; }
+
+/* ─── WHY CHOOSE ─────────────────────────────────────────────── */
+#why { background:var(--bg2); position:relative; overflow:hidden; }
+#why::before {
+  content:''; position:absolute; left:-180px; bottom:-180px;
+  width:580px; height:580px;
+  background:radial-gradient(circle, rgba(26,110,255,0.09) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+.why-head { text-align:center; max-width:600px; margin:0 auto 70px; }
+.why-head .sec-sub { margin:0 auto; }
+
+.why-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+}
+.why-card {
+  background:var(--surface); border:1px solid var(--rim);
+  border-radius:var(--r2); padding:36px 28px;
+  transition:all .28s; position:relative; overflow:hidden;
+}
+.why-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity:0; transition:opacity .3s;
+}
+.why-card:hover {
+  border-color:rgba(26,110,255,0.32);
+  background:rgba(26,110,255,0.05);
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.45);
+}
+.why-card:hover::after { opacity:1; }
+.why-icon {
+  width:54px; height:54px; border-radius:16px;
+  background:rgba(26,110,255,0.12);
+  border:1px solid rgba(26,110,255,0.28);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:22px;
+}
+.why-icon svg { width:26px; height:26px; }
+.why-name {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:21px; letter-spacing:0.04em;
+  color:var(--text); margin-bottom:10px;
+}
+.why-desc { font-size:13.5px; color:var(--muted); line-height:1.65; }
+
+/* ─── TESTIMONIALS ───────────────────────────────────────────── */
+#testimonials { background:var(--bg); }
+.testi-head {
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:56px; gap:24px; flex-wrap:wrap;
+}
+.testi-grid {
+  display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:18px;
+}
+.tcard {
+  background:var(--surface); border:1px solid var(--rim);
+  border-radius:var(--r2); padding:36px 30px;
+  transition:all .28s; position:relative;
+}
+.tcard:hover {
+  border-color:rgba(26,110,255,0.38);
+  transform:translateY(-6px);
+  box-shadow:0 22px 60px rgba(0,0,0,0.45);
+}
+.tcard.hero-t {
+  background:linear-gradient(135deg, rgba(26,110,255,0.22) 0%, rgba(26,110,255,0.06) 100%);
+  border-color:rgba(26,110,255,0.32);
+}
+.tcard-stars { color:var(--gold); font-size:15px; letter-spacing:3px; margin-bottom:14px; }
+.tcard-quote {
+  font-family:'Bebas Neue',sans-serif; font-size:80px;
+  color:rgba(26,110,255,0.22); line-height:.6; margin-bottom:12px;
+}
+.tcard-text { font-size:14px; color:var(--muted); line-height:1.72; margin-bottom:24px; }
+.tcard-author { display:flex; align-items:center; gap:12px; }
+.tcard-av {
+  width:42px; height:42px; border-radius:50%;
+  background:rgba(26,110,255,0.22); border:1px solid rgba(26,110,255,0.42);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--accent2);
+  flex-shrink:0;
+}
+.tcard-name { font-weight:700; font-size:14px; color:var(--text); margin-bottom:2px; }
+.tcard-role { font-size:12px; color:var(--muted); }
+
+/* ─── EXPORT BANNER ──────────────────────────────────────────── */
+#export { padding:80px 52px; background:var(--bg2); }
+.export-block {
+  max-width:1240px; margin:0 auto;
+  background:linear-gradient(120deg, #091535 0%, #06090F 55%, rgba(6,9,15,0.96) 100%);
+  border:1px solid var(--rim2); border-radius:32px;
+  padding:80px 80px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:60px; position:relative; overflow:hidden;
+}
+.export-block::before {
+  content:''; position:absolute; right:-80px; top:-80px;
+  width:500px; height:500px;
+  background:radial-gradient(circle, rgba(26,110,255,0.25) 0%, transparent 65%);
+  pointer-events:none;
+}
+/* world SVG watermark */
+.export-world {
+  position:absolute; right:70px; bottom:-20px;
+  opacity:.042; pointer-events:none;
+}
+.export-text h2 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,4vw,60px); line-height:.96; letter-spacing:0.02em;
+  color:var(--text); margin-bottom:18px;
+}
+.export-text h2 span { color:var(--accent); }
+.export-text p { font-size:15px; color:var(--muted); line-height:1.72; max-width:460px; }
+.export-actions { display:flex; flex-direction:column; gap:12px; flex-shrink:0; position:relative; z-index:1; }
+
+/* ─── CONTACT ────────────────────────────────────────────────── */
+#contact { background:var(--bg); }
+.contact-grid {
+  display:grid; grid-template-columns:1fr 1.1fr; gap:72px; align-items:start;
+}
+.contact-info { display:flex; flex-direction:column; gap:24px; margin-top:32px; }
+.cinfo-item {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:20px 22px; border:1px solid var(--rim);
+  border-radius:var(--r); background:var(--surface); transition:all .22s;
+}
+.cinfo-item:hover { border-color:rgba(26,110,255,0.32); transform:translateX(4px); }
+.cinfo-icon { flex-shrink:0; display:flex; align-items:center; padding-top:2px; }
+.cinfo-icon svg { width:22px; height:22px; }
+.cinfo-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; }
+.cinfo-val { font-size:14px; color:var(--text); font-weight:500; line-height:1.6; }
+
+.form-wrap {
+  background:rgba(255,255,255,0.025); border:1px solid var(--rim2);
+  border-radius:var(--r2); padding:42px;
+}
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-group { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.form-label { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.10em; }
+.form-input,.form-select,.form-textarea {
+  background:rgba(255,255,255,0.045); border:1px solid var(--rim2);
+  border-radius:10px; padding:13px 16px;
+  color:var(--text); font-family:'Outfit',sans-serif; font-size:14px;
+  outline:none; transition:border-color .2s, box-shadow .2s; width:100%;
+}
+.form-input::placeholder,.form-textarea::placeholder { color:rgba(210,225,248,0.22); }
+.form-input:focus,.form-select:focus,.form-textarea:focus {
+  border-color:rgba(26,110,255,0.55);
+  box-shadow:0 0 0 3px rgba(26,110,255,0.12);
+}
+.form-select option { background:#0A1020; }
+.form-textarea { resize:none; }
+.form-submit {
+  width:100%; padding:15px;
+  background:var(--accent); color:white; border:none;
+  border-radius:50px; font-family:'Outfit',sans-serif;
+  font-size:15px; font-weight:700; cursor:none;
+  letter-spacing:0.04em; transition:all .24s;
+  box-shadow:0 0 32px rgba(26,110,255,0.36); margin-top:4px;
+}
+.form-submit:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 56px rgba(26,110,255,0.58);
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+footer {
+  background:#03060C; border-top:1px solid var(--rim);
+  padding:72px 52px 36px;
+}
+.footer-top {
+  max-width:1240px; margin:0 auto;
+  display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:60px;
+  padding-bottom:52px; border-bottom:1px solid var(--rim); margin-bottom:32px;
+}
+.footer-brand { display:flex; flex-direction:column; }
+.footer-brand-logo {
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none; margin-bottom:16px;
+}
+.footer-brand-logo img {
+  height:34px; width:auto; object-fit:contain;
+  border-radius:5px; filter:brightness(1.05);
+}
+.footer-brand-name-text {
+  font-family:'Bebas Neue',sans-serif; font-size:26px;
+  letter-spacing:0.07em; color:var(--text);
+}
+.footer-brand-body { font-size:14px; color:var(--muted); line-height:1.72; max-width:260px; }
+.footer-socials { display:flex; gap:10px; margin-top:22px; }
+.fsoc {
+  width:36px; height:36px; border-radius:10px;
+  border:1px solid var(--rim2);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--muted); font-size:12px; font-weight:700;
+  text-decoration:none; transition:all .2s;
+}
+.fsoc:hover { background:var(--accent); border-color:var(--accent); color:white; }
+.footer-col h5 {
+  font-family:'Bebas Neue',sans-serif; font-size:16px;
+  letter-spacing:0.10em; color:var(--text);
+  margin-bottom:20px; text-transform:uppercase;
+}
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-col ul a { font-size:13.5px; color:var(--muted); text-decoration:none; transition:color .2s; }
+.footer-col ul a:hover { color:var(--text); }
+.footer-contact-col { display:flex; flex-direction:column; gap:14px; }
+.fcc-item { display:flex; align-items:flex-start; gap:12px; }
+.fcc-ico { color:var(--accent); flex-shrink:0; margin-top:2px; display:flex; }
+.fcc-ico svg { width:16px; height:16px; }
+.fcc-text { font-size:13px; color:var(--muted); line-height:1.6; }
+.footer-bar {
+  max-width:1240px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:12.5px; color:rgba(245,238,240,0.20);
+}
+
+/* ─── FLOATING BUTTONS ───────────────────────────────────────── */
+.wa-btn {
+  position:fixed; bottom:28px; left:28px; z-index:998;
+  width:52px; height:52px; border-radius:50%;
+  background:#25D366; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 24px rgba(37,211,102,0.45);
+  text-decoration:none; cursor:none; transition:transform .2s;
+}
+.wa-btn:hover { transform:scale(1.12); }
+.wa-btn svg { width:26px; height:26px; fill:white; }
+
+.scroll-top-btn {
+  position:fixed; bottom:28px; right:28px; z-index:998;
+  width:44px; height:44px; border-radius:12px;
+  background:rgba(26,110,255,0.85); backdrop-filter:blur(10px);
+  border:1px solid rgba(26,110,255,0.50);
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-size:18px; text-decoration:none; cursor:none;
+  opacity:0; pointer-events:none; transition:all .22s;
+  box-shadow:0 4px 20px rgba(26,110,255,0.30);
+}
+.scroll-top-btn.show { opacity:1; pointer-events:all; }
+.scroll-top-btn:hover { transform:translateY(-4px); }
+
+/* ─── REVEAL ANIMATIONS ──────────────────────────────────────── */
+.rv { opacity:0; transform:translateY(30px); transition:opacity .75s ease, transform .75s ease; }
+.rv.in { opacity:1; transform:translateY(0); }
+.rv.d1 { transition-delay:.10s; } .rv.d2 { transition-delay:.20s; }
+.rv.d3 { transition-delay:.30s; } .rv.d4 { transition-delay:.40s; }
+
+/* ─── MOBILE ─────────────────────────────────────────────────── */
+@media(max-width:900px){
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  section { padding:72px 20px; }
+  .hero-inner { padding:80px 20px; }
+  .char-wrap { display:none; }
+  .rings { width:90vmin; height:90vmin; right:-20vw; }
+  .brand-row { display:none; }
+  .svc-grid { grid-template-columns:1fr 1fr; }
+  .about-grid { grid-template-columns:1fr; gap:48px; }
+  .fc-top,.fc-bot { display:none; }
+  .stats-band-inner { grid-template-columns:1fr 1fr; }
+  .sband-item:nth-child(2) { border-right:none; }
+  .why-grid { grid-template-columns:1fr 1fr; }
+  .testi-grid { grid-template-columns:1fr; }
+  .export-block { flex-direction:column; padding:48px 32px; }
+  .contact-grid { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:40px; }
+  .hero-stats { max-width:100%; }
+}
+@media(max-width:560px){
+  .svc-grid { grid-template-columns:1fr; }
+  .why-grid { grid-template-columns:1fr; }
+  .stats-band-inner { grid-template-columns:1fr 1fr; }
+  .footer-top { grid-template-columns:1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .footer-bar { flex-direction:column; gap:8px; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- cursor -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<!-- ─── NAV ────────────────────────────────────────────────────── -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img class="nav-logo-img" src="https://www.nitratechs.com/images/logo.jpg"
+         alt="Nitra Technology"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="nav-logo-fallback" style="display:none">N</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li class="nav-has-drop">
+      <a href="#services">Services</a>
+      <div class="nav-drop">
+        <a href="#">Networking</a>
+        <a href="#">Server Implementation</a>
+        <a href="#">Security Systems</a>
+        <a href="#">Web / Software</a>
+        <a href="#">IT Support</a>
+        <a href="#">IT Solutions</a>
+        <a href="#">Printer &amp; Scanner</a>
+        <a href="#">Social Media Gear</a>
+        <a href="#">Mobile &amp; Accessories</a>
+      </div>
+    </li>
+    <li class="nav-has-drop">
+      <a href="#">Products</a>
+      <div class="nav-drop">
+        <a href="#">GI Conduits</a>
+        <a href="#">PVC Conduits</a>
+        <a href="#">Cable Tray System</a>
+        <a href="#">Cable Lugs &amp; Connectors</a>
+        <a href="#">EMT Fittings</a>
+        <a href="#">Brass Cable Gland</a>
+      </div>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Free Quote →</a>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="rings">
+    <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  </div>
+
+  <!-- Premium SVG tech character -->
+  <div class="char-wrap">
+    <div class="char-glow"></div>
+    <svg class="char-svg" viewBox="0 0 340 540" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bodyGrad" cx="50%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="#F08090"/>
+          <stop offset="100%" stop-color="#C05060"/>
+        </radialGradient>
+        <radialGradient id="headGrad" cx="45%" cy="35%" r="55%">
+          <stop offset="0%" stop-color="#F5C5A0"/>
+          <stop offset="100%" stop-color="#D08060"/>
+        </radialGradient>
+        <linearGradient id="trouserGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1A6EFF"/>
+          <stop offset="100%" stop-color="#0A40B0"/>
+        </linearGradient>
+        <linearGradient id="laptopGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1E2440"/>
+          <stop offset="100%" stop-color="#0E1428"/>
+        </linearGradient>
+        <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#4FA3FF"/>
+          <stop offset="100%" stop-color="#0050C8"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="softShadow">
+          <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#06090F" flood-opacity="0.7"/>
+        </filter>
+      </defs>
+      <!-- ground shadow -->
+      <ellipse cx="170" cy="528" rx="90" ry="13" fill="rgba(0,0,0,0.45)"/>
+      <!-- shoes -->
+      <ellipse cx="132" cy="508" rx="34" ry="13" fill="#1A1218"/>
+      <ellipse cx="208" cy="508" rx="34" ry="13" fill="#1A1218"/>
+      <rect x="98" y="490" width="68" height="22" rx="10" fill="#1A1218"/>
+      <rect x="174" y="490" width="68" height="22" rx="10" fill="#1A1218"/>
+      <!-- trousers -->
+      <rect x="108" y="360" width="56" height="138" rx="14" fill="url(#trouserGrad)"/>
+      <rect x="176" y="360" width="56" height="138" rx="14" fill="url(#trouserGrad)"/>
+      <rect x="158" y="360" width="24" height="138" fill="rgba(0,0,0,0.12)" rx="0"/>
+      <!-- body -->
+      <rect x="90" y="210" width="160" height="170" rx="30" fill="url(#bodyGrad)" filter="url(#softShadow)"/>
+      <rect x="155" y="215" width="12" height="165" fill="#1A6EFF" rx="4" opacity="0.9"/>
+      <rect x="170" y="215" width="10" height="165" fill="#7EC8FF" rx="4" opacity="0.9"/>
+      <rect x="183" y="215" width="10" height="165" fill="#FFD166" rx="4" opacity="0.9"/>
+      <polygon points="155,215 185,215 170,248" fill="white" opacity="0.90"/>
+      <polygon points="155,215 170,248 140,220" fill="rgba(0,0,0,0.10)"/>
+      <!-- left arm + laptop -->
+      <rect x="40" y="220" width="58" height="32" rx="16" fill="url(#bodyGrad)" transform="rotate(20,69,236)"/>
+      <rect x="30" y="285" width="110" height="70" rx="10" fill="url(#laptopGrad)"/>
+      <rect x="36" y="290" width="98" height="58" rx="7" fill="url(#screenGrad)"/>
+      <!-- screen UI glow -->
+      <rect x="36" y="290" width="98" height="58" rx="7" fill="rgba(26,110,255,0.1)"/>
+      <rect x="42" y="298" width="60" height="4" rx="2" fill="rgba(255,255,255,0.6)"/>
+      <rect x="42" y="308" width="45" height="3" rx="2" fill="rgba(255,255,255,0.35)"/>
+      <rect x="42" y="317" width="50" height="3" rx="2" fill="rgba(255,255,255,0.22)"/>
+      <rect x="80" y="318" width="8" height="18" rx="2" fill="#FFD166" filter="url(#glow)"/>
+      <rect x="93" y="310" width="8" height="26" rx="2" fill="#4FA3FF" filter="url(#glow)"/>
+      <rect x="106" y="314" width="8" height="22" rx="2" fill="#1A6EFF" filter="url(#glow)"/>
+      <rect x="30" y="352" width="110" height="8" rx="4" fill="#080D1A"/>
+      <!-- right arm -->
+      <rect x="240" y="210" width="56" height="30" rx="15" fill="url(#bodyGrad)" transform="rotate(-30,268,225)"/>
+      <ellipse cx="278" cy="183" rx="22" ry="26" fill="url(#headGrad)"/>
+      <ellipse cx="268" cy="162" rx="6" ry="12" fill="url(#headGrad)" transform="rotate(-10,268,162)"/>
+      <ellipse cx="280" cy="158" rx="6" ry="13" fill="url(#headGrad)" transform="rotate(-2,280,158)"/>
+      <ellipse cx="292" cy="161" rx="5" ry="12" fill="url(#headGrad)" transform="rotate(8,292,161)"/>
+      <ellipse cx="300" cy="168" rx="4" ry="10" fill="url(#headGrad)" transform="rotate(16,300,168)"/>
+      <!-- neck -->
+      <rect x="155" y="185" width="30" height="35" rx="10" fill="url(#headGrad)"/>
+      <!-- head -->
+      <ellipse cx="170" cy="148" rx="58" ry="62" fill="url(#headGrad)" filter="url(#softShadow)"/>
+      <path d="M148 168 Q158 158 170 165 Q182 158 192 168 Q185 175 170 170 Q155 175 148 168Z" fill="#3A1A10"/>
+      <ellipse cx="152" cy="145" rx="10" ry="11" fill="white"/>
+      <ellipse cx="188" cy="145" rx="10" ry="11" fill="white"/>
+      <ellipse cx="154" cy="147" rx="6" ry="7" fill="#1A0810"/>
+      <ellipse cx="190" cy="147" rx="6" ry="7" fill="#1A0810"/>
+      <ellipse cx="156" cy="144" rx="2.5" ry="2.5" fill="white"/>
+      <ellipse cx="192" cy="144" rx="2.5" ry="2.5" fill="white"/>
+      <path d="M142 133 Q152 126 162 131" stroke="#3A1A10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M178 131 Q188 126 198 133" stroke="#3A1A10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="112" cy="148" rx="11" ry="14" fill="url(#headGrad)"/>
+      <ellipse cx="113" cy="148" rx="5" ry="8" fill="#D08060" opacity="0.5"/>
+      <ellipse cx="228" cy="148" rx="11" ry="14" fill="url(#headGrad)"/>
+      <ellipse cx="227" cy="148" rx="5" ry="8" fill="#D08060" opacity="0.5"/>
+      <path d="M112 120 Q130 75 170 72 Q210 75 228 120 Q205 95 170 92 Q135 95 112 120Z" fill="#1A0810"/>
+      <ellipse cx="170" cy="82" rx="30" ry="18" fill="#1A0810"/>
+      <!-- glowing headphone hint -->
+      <rect x="108" y="130" width="6" height="38" rx="3" fill="#1A6EFF" opacity="0.7"/>
+      <rect x="226" y="130" width="6" height="38" rx="3" fill="#1A6EFF" opacity="0.7"/>
+      <path d="M114 118 Q170 80 226 118" stroke="#1A6EFF" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- hero content -->
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      Dubai's Premier IT Solutions Partner
+    </div>
+
+    <h1 class="hero-h1">
+      ONE STOP<br>
+      <span class="accent-word" data-text="IT">IT</span><br>
+      SOLUTIONS
+    </h1>
+
+    <p class="hero-sub">
+      Nitra Technology delivers enterprise networking, cybersecurity, server infrastructure, software and IT support — empowering businesses to thrive across UAE and beyond.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-accent">Get Free Quote →</a>
+      <a href="#services" class="btn btn-outline">Explore Services</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num">10<span>+</span></div>
+        <div class="hstat-label">Years Active</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">75<span>+</span></div>
+        <div class="hstat-label">Clients</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">40<span>+</span></div>
+        <div class="hstat-label">Brands</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- floating brand chips -->
+  <div class="brand-row">
+    <div class="brand-card">
+      <div class="brand-icon bi-net">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div><div>Networking</div><div class="brand-card-sub">LAN · WAN · WiFi</div></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-icon bi-sec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div><div>Security</div><div class="brand-card-sub">CCTV · Access</div></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-icon bi-srv">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
+      </div>
+      <div><div>Servers</div><div class="brand-card-sub">Cloud · VMware</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─────────────────────────────────────────────────── -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item"><span>◆</span> Networking Solutions</div>
+    <div class="ticker-item"><span>◆</span> Server Implementation</div>
+    <div class="ticker-item"><span>◆</span> CCTV &amp; Security</div>
+    <div class="ticker-item"><span>◆</span> Web &amp; Software</div>
+    <div class="ticker-item"><span>◆</span> IT Support</div>
+    <div class="ticker-item"><span>◆</span> Cable Management</div>
+    <div class="ticker-item"><span>◆</span> Middle East Export</div>
+    <div class="ticker-item"><span>◆</span> Mobile &amp; Accessories</div>
+    <div class="ticker-item"><span>◆</span> Networking Solutions</div>
+    <div class="ticker-item"><span>◆</span> Server Implementation</div>
+    <div class="ticker-item"><span>◆</span> CCTV &amp; Security</div>
+    <div class="ticker-item"><span>◆</span> Web &amp; Software</div>
+    <div class="ticker-item"><span>◆</span> IT Support</div>
+    <div class="ticker-item"><span>◆</span> Cable Management</div>
+    <div class="ticker-item"><span>◆</span> Middle East Export</div>
+    <div class="ticker-item"><span>◆</span> Mobile &amp; Accessories</div>
+  </div>
+</div>
+
+<!-- ─── SERVICES ───────────────────────────────────────────────── -->
+<section id="services">
+  <div class="wrap">
+    <div class="services-header">
+      <div>
+        <div class="tag rv">What We Do</div>
+        <h2 class="sec-title rv d1">OUR <span>SERVICES</span></h2>
+        <p class="sec-sub rv d2">End-to-end IT solutions for businesses across UAE, Middle East and Africa.</p>
+      </div>
+      <a href="#contact" class="btn btn-outline rv">Get Started →</a>
+    </div>
+    <div class="svc-grid">
+
+      <a href="#" class="svc-card rv">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="svc-num">01</div>
+        </div>
+        <div class="svc-name">Networking</div>
+        <div class="svc-desc">Enterprise LAN/WAN setup, wireless infrastructure, structured cabling and ongoing network management.</div>
+        <div class="svc-tags"><span class="svc-tag">LAN/WAN</span><span class="svc-tag">Wireless</span><span class="svc-tag">Cabling</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv d1">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <div class="svc-num">02</div>
+        </div>
+        <div class="svc-name">Server Implementation</div>
+        <div class="svc-desc">Server setup, virtualization, cloud migration and enterprise server management solutions.</div>
+        <div class="svc-tags"><span class="svc-tag">VMware</span><span class="svc-tag">Cloud</span><span class="svc-tag">Rack Setup</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv d2">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="svc-num">03</div>
+        </div>
+        <div class="svc-name">Security Systems</div>
+        <div class="svc-desc">CCTV installation, access control, biometrics, fire alarm and integrated security solutions.</div>
+        <div class="svc-tags"><span class="svc-tag">CCTV</span><span class="svc-tag">Access Control</span><span class="svc-tag">Biometrics</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv d3">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="svc-num">04</div>
+        </div>
+        <div class="svc-name">Web / Software</div>
+        <div class="svc-desc">Custom web development, mobile apps, ERP systems and digital transformation projects.</div>
+        <div class="svc-tags"><span class="svc-tag">Web Dev</span><span class="svc-tag">Mobile Apps</span><span class="svc-tag">ERP</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv d1">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="svc-num">05</div>
+        </div>
+        <div class="svc-name">IT Support Services</div>
+        <div class="svc-desc">Helpdesk, on-site and remote support, preventive maintenance and AMC service contracts.</div>
+        <div class="svc-tags"><span class="svc-tag">Helpdesk</span><span class="svc-tag">AMC</span><span class="svc-tag">Remote</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv d2">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <div class="svc-num">06</div>
+        </div>
+        <div class="svc-name">Social Media Gear</div>
+        <div class="svc-desc">Gimbal stabilizers, ring lights, lavalier microphones, drones and all creator accessories.</div>
+        <div class="svc-tags"><span class="svc-tag">Gimbal</span><span class="svc-tag">Lighting</span><span class="svc-tag">Drones</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          </div>
+          <div class="svc-num">07</div>
+        </div>
+        <div class="svc-name">Printer &amp; Scanner</div>
+        <div class="svc-desc">Supply, installation, repair and maintenance of printers, scanners and document systems.</div>
+        <div class="svc-tags"><span class="svc-tag">Repair</span><span class="svc-tag">Supply</span><span class="svc-tag">Maintenance</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv d1">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div class="svc-num">08</div>
+        </div>
+        <div class="svc-name">Mobile &amp; Accessories</div>
+        <div class="svc-desc">Latest mobile devices and accessories from 40+ top brands at competitive market prices.</div>
+        <div class="svc-tags"><span class="svc-tag">Smartphones</span><span class="svc-tag">Accessories</span><span class="svc-tag">Wholesale</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card rv d2">
+        <div class="svc-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="svc-num">09</div>
+        </div>
+        <div class="svc-name">IT Solutions</div>
+        <div class="svc-desc">Turnkey IT infrastructure, system integration and strategic IT consulting for your business.</div>
+        <div class="svc-tags"><span class="svc-tag">Integration</span><span class="svc-tag">Consulting</span><span class="svc-tag">Turnkey</span></div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS BAND ───────────────────────────────────────────── -->
+<div class="stats-band">
+  <div class="stats-band-inner">
+    <div class="sband-item rv">
+      <div class="sband-num">10<sup>+</sup></div>
+      <div class="sband-label">Years of Experience</div>
+    </div>
+    <div class="sband-item rv d1">
+      <div class="sband-num">75<sup>+</sup></div>
+      <div class="sband-label">Satisfied Clients</div>
+    </div>
+    <div class="sband-item rv d2">
+      <div class="sband-num">40<sup>+</sup></div>
+      <div class="sband-label">Brands Available</div>
+    </div>
+    <div class="sband-item rv d3">
+      <div class="sband-num">60<sup>+</sup></div>
+      <div class="sband-label">Projects Completed</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ABOUT ───────────────────────────────────────────────── -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual rv">
+        <div class="about-big-card">
+          <div>
+            <!-- Real logo in the card -->
+            <img src="https://www.nitratechs.com/images/logo.jpg" alt="Nitra Technology"
+              style="height:48px;width:auto;object-fit:contain;border-radius:6px;margin-bottom:28px;filter:brightness(1.08);display:block;"
+              onerror="this.style.display='none'">
+            <div class="about-tagline">BEST IT<br>SUPPORT IN <span>UAE</span></div>
+            <p class="about-body">Welcome to Nitra Technology — your one-stop destination for comprehensive IT solutions. We are a leading IT company specializing in a wide range of services to meet all your technological needs. With our cutting-edge solutions, we empower businesses to thrive in the digital age.</p>
+          </div>
+          <div class="about-stats-row">
+            <div class="astat"><div class="astat-num">10<span>+</span></div><div class="astat-label">Years</div></div>
+            <div class="astat"><div class="astat-num">75<span>+</span></div><div class="astat-label">Clients</div></div>
+            <div class="astat"><div class="astat-num">60<span>+</span></div><div class="astat-label">Projects</div></div>
+          </div>
+        </div>
+        <!-- floating chips -->
+        <div class="float-chip fc-top">
+          <div class="fc-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <div><div style="font-size:11px;color:var(--muted)">Certified Partner</div><div>UAE Trusted IT</div></div>
+        </div>
+        <div class="float-chip fc-bot">
+          <div class="fc-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div><div style="font-size:11px;color:var(--muted)">Response Time</div><div>24/7 Support</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="tag rv">About Nitra Technology</div>
+        <h2 class="sec-title rv d1">WHY WE'RE<br>YOUR BEST <span>CHOICE</span></h2>
+        <p class="sec-sub rv d2" style="margin-bottom:36px">Over a decade of trusted IT expertise serving businesses across Dubai and the UAE with reliable, scalable solutions.</p>
+        <div class="feat-list">
+          <div class="feat-item rv d1">
+            <div class="feat-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <div class="feat-title">Expertise &amp; Experience</div>
+              <div class="feat-body">10+ years of hands-on IT experience across networking, security, and enterprise systems in the UAE.</div>
+            </div>
+          </div>
+          <div class="feat-item rv d2">
+            <div class="feat-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <div class="feat-title">Reliability &amp; Quality</div>
+              <div class="feat-body">SLA-backed service delivery with rigorous quality assurance across every project we undertake.</div>
+            </div>
+          </div>
+          <div class="feat-item rv d3">
+            <div class="feat-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <div>
+              <div class="feat-title">Cutting-Edge Technology</div>
+              <div class="feat-body">We stay at the forefront of technological advancement, offering clients the most current IT solutions.</div>
+            </div>
+          </div>
+          <div class="feat-item rv d4">
+            <div class="feat-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div class="feat-title">Regional Coverage</div>
+              <div class="feat-body">Serving UAE, Middle East, and Africa — we understand local business needs and regional compliance.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:36px" class="rv d4">
+          <a href="#contact" class="btn btn-accent">Work With Us →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY CHOOSE ─────────────────────────────────────────── -->
+<section id="why">
+  <div class="wrap">
+    <div class="why-head">
+      <div class="tag rv" style="justify-content:center">Why Choose Us</div>
+      <h2 class="sec-title rv d1" style="text-align:center">THE NITRA <span>ADVANTAGE</span></h2>
+      <p class="sec-sub rv d2" style="margin:0 auto;text-align:center">We go beyond simple IT support — we become your long-term strategic technology partner.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card rv">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
+        </div>
+        <div class="why-name">Deep Expertise</div>
+        <div class="why-desc">A decade of UAE IT experience means we've solved every problem you're likely to face — and many you haven't yet.</div>
+      </div>
+      <div class="why-card rv d1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div class="why-name">Reliability First</div>
+        <div class="why-desc">Our SLA-backed services guarantee response times and quality standards that keep your business running non-stop.</div>
+      </div>
+      <div class="why-card rv d2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <div class="why-name">Latest Technology</div>
+        <div class="why-desc">We stay current on every major tech advancement so you always benefit from the best available solutions.</div>
+      </div>
+      <div class="why-card rv d3">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="why-name">Regional Reach</div>
+        <div class="why-desc">Operations across UAE, Middle East, and Africa with deep local knowledge of compliance and business needs.</div>
+      </div>
+      <div class="why-card rv d1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="why-name">Tailored Solutions</div>
+        <div class="why-desc">We don't do one-size-fits-all. Every solution is custom-designed to align with your specific operational goals.</div>
+      </div>
+      <div class="why-card rv d2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="why-name">Always Available</div>
+        <div class="why-desc">24/7 support via phone, email and on-site — because your business doesn't stop and neither do we.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────────────── -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="testi-head">
+      <div>
+        <div class="tag rv">Client Reviews</div>
+        <h2 class="sec-title rv d1">WHAT CLIENTS <span>SAY</span></h2>
+      </div>
+      <a href="#" class="btn btn-outline rv">View All →</a>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard hero-t rv">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"</div>
+        <div class="tcard-text">Working with Nitra Technology has been an absolute pleasure! Their IT products are impressive and quality is unmatched. As a corporate client, their solutions have helped us streamline operations and boost productivity significantly. Highly recommended to any business.</div>
+        <div class="tcard-author">
+          <div class="tcard-av">TJ</div>
+          <div><div class="tcard-name">Tony Jason</div><div class="tcard-role">Corporate Client, Dubai</div></div>
+        </div>
+      </div>
+      <div class="tcard rv d1">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"</div>
+        <div class="tcard-text">Nitra Technology has been our trusted IT partner for networking, CCTV, and server implementation. They consistently deliver reliable, high-quality results that keep our operations running smoothly.</div>
+        <div class="tcard-author">
+          <div class="tcard-av">JS</div>
+          <div><div class="tcard-name">Jane Sarah</div><div class="tcard-role">Operations Manager</div></div>
+        </div>
+      </div>
+      <div class="tcard rv d2">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"</div>
+        <div class="tcard-text">We chose Nitra for our IT infrastructure and their tailored solutions significantly improved our efficiency and system reliability. From networking to security — their attention to detail consistently exceeded all expectations.</div>
+        <div class="tcard-author">
+          <div class="tcard-av">MA</div>
+          <div><div class="tcard-name">Mohammed Abdul</div><div class="tcard-role">IT Director, UAE</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPORT BANNER ────────────────────────────────────── -->
+<section id="export" style="padding:80px 52px; background:var(--bg2);">
+  <div class="export-block rv">
+    <div class="export-world">
+      <svg width="280" height="280" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="0.4"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </div>
+    <div class="export-text">
+      <h2>WE EXPORT IT PRODUCTS<br>THROUGHOUT <span>MIDDLE EAST</span><br>&amp; AFRICA</h2>
+      <p>Supplying premium IT infrastructure, cable management systems, conduits and technology products across borders with reliability and competitive pricing.</p>
+    </div>
+    <div class="export-actions">
+      <a href="#contact" class="btn btn-accent">Get Export Pricing →</a>
+      <a href="#contact" class="btn btn-outline">Contact Our Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ──────────────────────────────────────────── -->
+<section id="contact">
+  <div class="wrap">
+    <div class="tag rv" style="justify-content:center;margin-bottom:16px">Get In Touch</div>
+    <h2 class="sec-title rv d1" style="text-align:center;margin-bottom:60px">READY TO <span>TRANSFORM</span><br>YOUR IT?</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="sec-sub rv" style="margin-bottom:0">Reach out for a free consultation and quote. Our team will design the perfect IT solution for your business goals.</p>
+        <div class="contact-info">
+          <div class="cinfo-item rv d1">
+            <div class="cinfo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="cinfo-label">Phone</div>
+              <div class="cinfo-val">(+971) 58 265 2070<br>(+971) 04 885 1803</div>
+            </div>
+          </div>
+          <div class="cinfo-item rv d2">
+            <div class="cinfo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="cinfo-label">Email</div>
+              <div class="cinfo-val">info@nitratechs.com</div>
+            </div>
+          </div>
+          <div class="cinfo-item rv d3">
+            <div class="cinfo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="cinfo-label">Address</div>
+              <div class="cinfo-val">Office No: 71, 3rd Floor, Souk Al Kabeer Building,<br>Khalid Bin Waleed Road, Dubai, UAE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-wrap rv d2">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input class="form-input" type="text" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" type="text" placeholder="Doe">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="john@company.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service Needed</label>
+          <select class="form-select">
+            <option value="">Select a service...</option>
+            <option>Networking</option>
+            <option>Security Systems</option>
+            <option>Server Implementation</option>
+            <option>Web / Software</option>
+            <option>IT Support</option>
+            <option>Products / Export</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Message</label>
+          <textarea class="form-textarea" rows="4" placeholder="Tell us about your project..."></textarea>
+        </div>
+        <button class="form-submit" onclick="this.textContent='✓ Sent! We\'ll be in touch.';this.style.background='#22c55e'">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="footer-brand-logo">
+        <img src="https://www.nitratechs.com/images/logo.jpg" alt="Nitra Technology"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="footer-brand-name-text" style="display:none">NITRA TECH</span>
+      </a>
+      <p class="footer-brand-body">Your one-stop destination for comprehensive IT solutions. Empowering businesses to thrive in the digital age since 2014.</p>
+      <div class="footer-socials">
+        <a href="#" class="fsoc">in</a>
+        <a href="#" class="fsoc">fb</a>
+        <a href="#" class="fsoc">tw</a>
+        <a href="#" class="fsoc">wa</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">Networking</a></li>
+        <li><a href="#">Security Systems</a></li>
+        <li><a href="#">Web / Software</a></li>
+        <li><a href="#">Server Setup</a></li>
+        <li><a href="#">IT Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <div class="footer-contact-col">
+        <div class="fcc-item">
+          <div class="fcc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="fcc-text">(+971) 58 265 2070<br>(+971) 04 885 1803</div>
+        </div>
+        <div class="fcc-item">
+          <div class="fcc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="fcc-text">info@nitratechs.com</div>
+        </div>
+        <div class="fcc-item">
+          <div class="fcc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="fcc-text">Souk Al Kabeer Building,<br>Khalid Bin Waleed Rd, Dubai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2025 Nitra Technology. All rights reserved.</span>
+    <span>Dubai · UAE · Middle East · Africa</span>
+  </div>
+</footer>
+
+<!-- WhatsApp -->
+<a href="https://api.whatsapp.com/send?phone=971582652070" target="_blank" class="wa-btn">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z" fill-rule="evenodd"/></svg>
+</a>
+<a href="#" class="scroll-top-btn" id="stb">↑</a>
+
+<script>
+// Cursor
+const cur  = document.getElementById('cur');
+const curR = document.getElementById('curRing');
+document.addEventListener('mousemove', e => {
+  cur.style.left  = e.clientX + 'px';
+  cur.style.top   = e.clientY + 'px';
+  setTimeout(() => {
+    curR.style.left = e.clientX + 'px';
+    curR.style.top  = e.clientY + 'px';
+  }, 60);
+});
+document.querySelectorAll('a,button,.svc-card,.tcard,.why-card,.feat-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cur.style.width  = '18px';  cur.style.height  = '18px';
+    curR.style.width = '54px'; curR.style.height = '54px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cur.style.width  = '10px'; cur.style.height  = '10px';
+    curR.style.width = '38px'; curR.style.height = '38px';
+  });
+});
+
+// Nav scroll shadow
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  document.getElementById('stb').classList.toggle('show', window.scrollY > 400);
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.09 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Counter animation
+function animateCounters() {
+  document.querySelectorAll('.hstat-num, .sband-num, .astat-num').forEach(el => {
+    const match = el.textContent.match(/(\d+)/);
+    if (!match) return;
+    const target = parseInt(match[1]);
+    const suffix = el.innerHTML.replace(/\d+/, '');
+    let current = 0;
+    const step = Math.max(1, Math.ceil(target / 60));
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.innerHTML = current + suffix;
+      if (current >= target) clearInterval(timer);
+    }, 22);
+  });
+}
+setTimeout(animateCounters, 600);
+</script>
+
+</body>
+</html>
+
