@@ -109,7 +109,7 @@ WE HAVE BOX-SIZING
 ALWAYS USE BORDER BOX -->
 
 
-<style>
+<!-- <style>
   *{
     box-sizing: border-box;
   }
@@ -121,9 +121,42 @@ ALWAYS USE BORDER BOX -->
   }
 </style>
 <div class=" box"> Now I am extaclty 200 wide</div>
+ -->
 
+ <style>
+  *{
+    box-sizing: border-box
+  }
 
+  .card{
+    width: 300px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding : 24px;
+    margin: 20px auto; 
+    /* AUTO enters it horizontally  */
+  }
 
+  .card h2{
+    margin: 0 0 8px 0;
+    font-size: 20px;
+  }
+
+  .card p{
+    margin: 0;
+    color: #666;
+  }
+ </style>
+<div class="card">
+  <h2> This is my first card</h2>
+  <p> This is a clean card component using the box model.</p>
+
+</div>
+
+<!-- ALWAYS PUT 
+*{box-sizing: border-box;}
+at Top everytime. All developer does this without thinking. -->
 
 
 
