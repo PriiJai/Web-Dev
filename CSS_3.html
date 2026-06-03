@@ -104,7 +104,26 @@ border-radius: 50%;     full circle!  -->
 <div class="box"> How wide am I really?</div>
 
 but this is 250 px wide so 
-WE HAVE BOX-SIZING -->
+WE HAVE BOX-SIZING
+
+ALWAYS USE BORDER BOX -->
+
+
+<style>
+  *{
+    box-sizing: border-box;
+  }
+
+  .box{
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+  }
+</style>
+<div class=" box"> Now I am extaclty 200 wide</div>
+
+
+
 
 
 
