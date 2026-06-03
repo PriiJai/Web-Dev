@@ -1,0 +1,159 @@
+<!-- Selectors let you target which HTML element to style
+Speciticity determines which rule wins when multiple rules conflict.
+
+
+Tag: h1 
+Class : box 
+ID : #header 
+Combinators: space > + ~
+Pseudo : :hover:first-child
+Selectors let you target which HTML element to style
+Speciticity determines which rule wins when multiple rules conflict.
+
+
+Tag: h1 
+Class : box 
+ID : #header 
+Combinators: space > + ~
+Pseudo : :hover:first-child
+-->
+
+<!--1. TAG SELECTOR -->
+ <style>
+  p{
+    color: navy;
+
+  }
+
+  
+
+ </style>
+
+ <p> I am navy blue</p>
+ <p> Me too, navy blue</p>
+ <h1> I am not affected- I am h1 not p</h1>
+
+
+ <!-- 2.CLASS SELECTOR -->
+
+ <style>
+
+ 
+  .highlight{
+    background-color: yellow;
+  }
+
+ </style>
+
+
+<p class = "highlight">
+  I have yellow background
+</p>
+
+<p> I am normal - no class</p>
+
+<h1 class = "highlight">
+  I also have yellow - same classworks on any tag
+</h1>
+
+
+<!-- 3. ID SELECTOR -->
+
+<style>
+  #title{
+    font-size: 40x;
+    color: red;
+  }
+
+</style>
+
+<h1 id = "title">
+  I am big and red
+</h1>
+
+<h1>
+  I am normal h1
+</h1>
+
+<!-- 4. Decendant (space) -->
+
+<style>
+  div p{
+    color : green;
+  }
+</style>
+
+<p>
+  I am not greeen 
+</p>
+
+<div>
+  <p> I am green - I am inside the div</p>
+</div>
+
+<!-- 5. Child Sector -->
+
+<style>
+  div >p{
+    font-weight: bold;
+  }
+</style>
+
+<div> 
+  <p> I am bold - direct child of div</p>
+  <span>
+    <p>
+      I am not bold - I am inside span . not directly in div
+    </p>
+  </span>
+</div>
+
+<!-- 
+div
+├── p          ← div > p targets THIS (direct child)
+└── span
+    └── p      ← div p targets THIS too, but div > p does NOT -->
+
+
+<!-- 
+6. Pseudo Class -->
+<style>
+  button{
+    background: blue;
+    color: white;
+  }
+
+  button:hover{
+    background: red;
+  }
+</style>
+
+<button>
+  Hover over me!
+</button>
+
+<!-- 
+7. :first-child -->
+
+<style>
+  li:first-child{
+    color: red;
+    font-weight: bold;
+  }
+</style>
+
+<ul>
+  <li> I am Red and bold - first child</li>
+  <li> I am normal</li>
+  <li> I am normal</li>
+</ul>
+
+<!-- :last-child / :nth-child(2) -->
+
+<style>
+  p        { color: gray; }   /* weakest */
+  .text    { color: blue; }
+  #headline{ color: red; }    /* strongest */
+</style>
+
+<p id="headline" class="text">What color am I?</p>

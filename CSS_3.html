@@ -1,0 +1,110 @@
+<!-- BOX MODEL (MOST IMP CONCEPT IN CSS)
+A LOT OF LAYOUT PROBLEMS WILL MAKE SENSE
+
+
+Every single HTML element 
+<p> </p>
+<div> </div>
+<button> </button>
+everything is a rectangular box.
+
+so this box has 4 layers:
+
+┌─────────────────────────────┐
+│         MARGIN              │  ← space outside (pushes other elements away)
+│  ┌───────────────────────┐  │
+│  │       BORDER          │  │  ← the visible edge/line
+│  │  ┌─────────────────┐  │  │
+│  │  │    PADDING      │  │  │  ← space inside (between content and border)
+│  │  │  ┌───────────┐  │  │  │
+│  │  │  │  CONTENT  │  │  │  │  ← your actual text or image
+│  │  │  └───────────┘  │  │  │
+│  │  └─────────────────┘  │  │
+│  └───────────────────────┘  │
+└─────────────────────────────┘
+ -->
+
+
+<!-- EXAMPLE -->
+
+<!-- <style>
+  div{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    background: lightblue;
+    padding: 20px;
+    border: 3px solid black;
+    margin: 30px;
+  }
+</style>
+
+<div> I am a box</div> -->
+
+
+<!-- MARGIN VS PADDING
+MARGIN: SPACE inside
+PADDING: SPACE outside -->
+<!-- <style>
+  .box{
+    background :orange;
+    padding: 30px;
+    margin : 40px;
+  }
+</style>
+
+<div class="box"> Hello</div>
+<div class="box" > World</div> -->
+
+
+<!-- SHORTHAND FOR PADDING -->
+<!-- All 4 sides same
+padding : 20px;
+
+Top/Bottom  Left/Right
+padding : 10px 20px;
+
+Top  Right  Bottom  Left (clockwise) 
+padding 10px 20px 30px 40px;
+
+ Individual sides 
+padding-top: 10px;
+padding-right: 20px;
+padding-bottom: 10px;
+padding-left: 20px; -->
+
+<!-- SAME SHORTHAND FOR MARGIN TOO. -->
+
+
+<!-- BORDER
+ border: thickness  style  color 
+border: 3px solid red;
+border: 1px dashed blue;
+border: 5px dotted green;
+
+ Individual sides 
+border-top: 2px solid black;
+border-bottom: 2px solid black;
+ no left or right border 
+
+ Rounded corners
+border-radius: 8px;     slightly rounded 
+border-radius: 50%;     full circle!  -->
+
+
+<!-- PROBLEM - SOLUTION IS <box-sizing> -->
+<!-- <style>
+  .box{
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+
+  }
+</style>
+<div class="box"> How wide am I really?</div>
+
+but this is 250 px wide so 
+WE HAVE BOX-SIZING -->
+
+
+
