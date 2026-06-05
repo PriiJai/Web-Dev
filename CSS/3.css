@@ -1,0 +1,29 @@
+MARGINS
+
+/* p{
+  margin-left: 50px;
+  margin-top: 10%;
+  margin-top: 50px;
+  margin-right:50px;
+  margin-bottom:50px;
+
+} */
+
+
+/* 
+p{
+  margin:50px 50px 50px 50px;
+  margin:50px 50px 50px;
+  margin:50px 50px ;
+  margin:50px;
+} */
+
+
+b{
+margin-top: 60px;
+}
+
+p{
+  margin-top: inherit;
+  margin: 50px;
+}
