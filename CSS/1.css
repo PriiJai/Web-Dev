@@ -1,0 +1,33 @@
+/* COMMENTS the background color of body*/
+#welcome {
+  background-color: green;
+}
+
+.heading{
+background-color: yellow;
+color:blue;
+
+}
+
+
+p.heading{
+background-color: red;
+color: white;
+
+}
+
+
+/* UNIVERSAL SELECTOR */
+
+* {
+  color: purple;
+
+}
+
+
+
+
+
+
+
+
