@@ -1,0 +1,21 @@
+/*OUTLINE */
+
+h1{
+  outline-style: solid;
+}
+
+h2{
+  outline-style: dashed;
+}
+
+h3{
+   outline-style: double;
+}
+
+
+h4{
+ 
+  border:20px dashed green;
+  outline-style: dashed;
+  outline-offset: 5px;
+}

@@ -1,0 +1,18 @@
+h1{
+  height: 80px;
+  width: 80px;
+  background-color: lightblue;
+}
+
+h2{
+  height: 80px;
+  width: 55%;
+  background-color: lightgreen;
+}
+
+
+h3{
+  height: 80px;
+  max-width: 55%;
+  background-color: lightgreen;
+}

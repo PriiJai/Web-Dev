@@ -1,0 +1,35 @@
+/*TEXTS*/
+
+h1{
+  color: blue;
+  background-color: lightblue;
+
+}
+
+/*ALIGNMENT*/
+p{
+  text-align: right;
+}
+
+h2{
+  text-align: left;
+}
+
+h3{
+  text-align: center;
+
+}
+
+h4{
+  text-align: justify;
+}
+
+h1{
+  text-align-last:center; /*aligns last line of text*/
+}
+
+b.text{
+  background-color: red;
+  vertical-align : top;
+}
+

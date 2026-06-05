@@ -1,0 +1,40 @@
+
+/*TEXT DECORATION*/
+
+h1{
+  text-decoration-line: underline;
+  text-decoration-color: green;
+  text-decoration-style: double;
+  text-decoration-thickness: 5px;
+  
+}
+
+h2{
+  text-decoration-line: line-through;
+}
+
+h3{
+  text-decoration-line: overline;
+}
+
+h4{
+  text-decoration-line: overline underline;
+}
+
+/*ALL TOGETHER*/
+h5{
+  text-decoration: overline purple solid 6px;
+}
+
+h1,a{
+  text-transform: uppercase;
+   text-transform: lowercase;
+    text-transform: capitalize;
+
+}
+
+/*TEXT INDENTATION*/
+.mixed{
+  text-indent: 50px;
+  letter-spacing: 10px;
+}
