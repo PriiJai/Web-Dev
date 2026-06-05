@@ -1,1 +1,20 @@
 /* FONTS */
+
+h1{
+  font-family: Arial, Helvetica; sans-serif;
+  font-style: Italic;
+  font-weight: normal;
+  font-size: 50px;
+}
+
+h2{
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size:  4em;
+}
+
+h3{
+  font-style: oblique;
+}
+h4{
+  font-style: normal;
+}
