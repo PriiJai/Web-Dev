@@ -25,5 +25,19 @@ body{
 }
 
 .second{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.child1{
+  height: 140px;
+  width: 140px;
+  background-color: red;
+}
+
+.child2{
+  height: 140px;
+  width: 140px;
   background-color: red;
 }
