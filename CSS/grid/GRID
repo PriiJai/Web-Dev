@@ -1,6 +1,12 @@
-FLEXBOX IS FOR 1D LAYOUT
+FLEXBOX IS FOR 1D LAYOUT(we can do 2D by flexbox but it is complex )
 
 GRID IS FOR 2D LAYOUT  (when the layout is complex)
+GRID: MATRIX ROWS AND COLUMN
+
+
+Parent: Grid (coontainer)'
+rows and COLUMN
+items: Grid-items
 
 
 
