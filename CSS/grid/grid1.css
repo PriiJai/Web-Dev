@@ -1,0 +1,46 @@
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+body{
+  background-color: grey;
+  
+  font-size: 40px;
+
+}
+
+
+.container{
+  display:grid;
+  height: 800px;
+  width:800px;
+  grid-template-rows: 1fr 2fr 2fr 1fr;
+  grid-template-columns: repeat(3 ,1fr);
+  gap: 20px;
+
+
+}
+
+.box{
+  background-color: rgb(85, 85, 205);
+}
+
+.header{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  
+}
+
+.sidebar{
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.content1{
+  grid-column: 2/4;
+}
+
+.footer{
+  grid-column: 1/4;
+}
