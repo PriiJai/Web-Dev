@@ -1,0 +1,112 @@
+/* Study from W3 school for reference everything is there*/
+
+
+/*You can learn shorthand property of animation*/
+
+*{
+  height:0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: black;
+ 
+}
+
+.container{
+
+  padding: 20px;
+  position: relative;
+
+
+}
+
+.box{
+  height: 100px;
+  width: 200px;
+  background-color: red;
+  animation-name: moving;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  /* animation-timing-function: ease-in ; */
+
+  /* animation-timing-function: ease-out ; */
+
+  animation-timing-function: linear ;
+  
+  /* animation-timing-function: ease-in-out ; */
+
+  /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1) ; */
+
+  /* cubic-bezier : check from inspect and change as required*/
+
+  /* animation-direction: alternate; */
+  animation-delay: 2s;
+  position: absolute;
+  /* animation-fill-mode: forwards; count not infinite then use*/
+  /* animation-fill-mode: backwards; */
+
+
+
+
+}
+
+/* @keyframes moving {
+  from
+  {
+background-color: blue;
+top: 10px;
+left: 10px;
+  }
+  to{
+background-color: aliceblue;
+top: 10px;
+left: 1000px;
+
+  }
+  
+} */
+
+
+@keyframes moving {
+  0%
+  {
+background-color: blue;
+top: 10px;
+left: 10px;
+  }
+  25%{
+background-color: aliceblue;
+top: 10px;
+left: 1000px;
+
+  }
+
+  50%{
+background-color: yellow;
+top: 500px;
+left: 1000px;
+
+  }
+
+  75%{
+background-color: aliceblue;
+top: 500px;
+left: 10px;
+
+  }
+
+  100%{
+background-color: aliceblue;
+top: 500px;
+left: 10px;
+
+  }
+
+   100%
+  {
+background-color: blue;
+top: 10px;
+left: 10px;
+  }
+
+  
+}
