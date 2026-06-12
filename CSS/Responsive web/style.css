@@ -1,0 +1,74 @@
+.container{
+  height: 400px;
+  width: 400px;
+  font-size: 50px;
+  background-color: aqua;
+}
+
+
+
+
+
+
+  /* DESKTOP FIRST 
+  DEFAULT FOR THE DESKTOP*/
+/* 
+@media screen and (max-width:900px) {
+
+  .container{
+    background-color: green;
+    font-size: 40px;
+  }
+  
+}
+
+@media screen and (max-width:600px){
+
+  .container{
+    
+    background-color: pink;
+    font-size: 30px;
+  }
+} */
+
+
+
+
+
+ /* @media screen and (min-width:800px){
+
+  .container{
+    background-color: red;
+    font-weight: 80px;
+  }
+
+  
+ } */
+
+
+
+/* MOBILE FITST
+DEFAULT FOR MOBILE */
+
+
+@media screen and (min-width:600px) {
+
+  .container{
+    background-color: green;
+    font-size: 60px;
+  }
+  
+}
+
+@media screen and (min-width:900px) {
+
+  .container{
+    background-color: blue;
+    font-size: 80px;
+  }
+  
+}
+
+
+/* IN REAL WORLD WE USE MOBILE-FIRST APPROACH */
+
