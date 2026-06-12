@@ -1,0 +1,44 @@
+/* .container{
+  height: 200px;
+  width: 200px;
+  background-color: aqua;
+
+
+   */
+  
+  /* box-shadow: 20px 10px white; */
+  /* box-shadow: 10px 10px 10px white;*/
+   /*Blur radius */
+  /* box-shadow: 0px 0px 0px 20px white; */
+  /* increase the shadow in every direction by 20px */
+
+  /* box-shadow: 20px 20px 5px 30px white; */
+
+  /* box-shadow: inset 10px 10px white; */
+
+
+  /* SUN*/
+  /*background-color: yellow;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px 10px red; 
+
+
+}*/
+
+
+/*offset-x offset-y blur-radius  spread-radius*/
+
+
+/*OVERFLOW*/
+
+.container{
+  height: 200px;
+  width: 200px;
+  background-color: aqua;
+  /* overflow: hidden; */
+  overflow: scroll;
+  
+}
+
+  
+  
