@@ -105,4 +105,72 @@ console.log(typeof s)
 
 let h= 20;
 h = 20;
+
 console.log(h)
+
+
+// let str ="Pri";
+// str[0]='M';
+// console.log(str)
+//ERROR
+
+
+
+let str1 ="Pri";
+str1="Mohan";
+console.log(str1);
+
+
+//NON Primitive data type mutable
+
+
+let arr1 = [10,20,30,40];
+arr1[0]=70;
+arr1.push(90);
+console.log(arr1);
+
+let obj1 = {
+  name:"Mohan",
+  age:20
+}
+
+console.log(obj1);
+
+console.log(obj1.name);
+
+obj1.name ="Rohan";
+console.log(obj1);
+
+console.log(obj1.name);
+
+
+
+//immutable (in space where it stores the valye in the address one formed cannot be changed)
+let i = 10;
+let j = i;
+
+j = 20;
+
+
+
+
+console.log(i,j);
+
+
+
+//object
+//refers to same data 
+//obj2 and obj3 refer to same data
+
+let obj2 = {
+  name:"Mohan",
+  age:20
+}
+
+let obj3 = obj2;
+obj3.name="Rohan"
+console.log(obj2)
+
+
+
+
