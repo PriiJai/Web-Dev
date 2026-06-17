@@ -9,10 +9,13 @@
 // 4 Gb ram : 2^32
 
 
+//primitive data type is in heap
 
-let a = 10;
-let b = 30;
-a = 50;
 
-console.log(a)
+2^31 
++(2^30 -1)
+(-2^30)
+
+
+
 
