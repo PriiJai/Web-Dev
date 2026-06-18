@@ -85,11 +85,82 @@
 
 
 
-console.log(String(true));
-console.log(typeof String(true));
+// console.log(String(true));
+// console.log(typeof String(true));
 
-console.log(String(false));
-console.log(typeof String(false));
+// console.log(String(false));
+// console.log(typeof String(false));
+
+// //Boolean convert 
+// console.log(Boolean(10));
+// console.log(Boolean(-10));
+// console.log(Boolean(0));
+
+
+// console.log(Boolean("Hello World"));
+// console.log(Boolean(""));
+// console.log(Boolean(undefined));
+// console.log(Boolean(null));
+
+//Computer science chalenge
+// let a = 0.1;
+// let b = 0.2;
+// let c= a+b;
+// console.log(c==0.3);  //False?? why? approx me addition ka answer aata as binary mei addition hota na
+// console.log(c);
+
+
+//1: null is loosely equal to undefined only
+
+// console.log(null==undefined);
+// console.log(null===undefined);
+// console.log(null==0);
+// console.log(null=="");
+// console.log(null==false);
+// console.log(null==true);
+
+//<,>,>=,<= (null --> number , undefined --> NaN)
+// console.log(null>=0);
+// console.log(null<=0);
+// console.log(null>0);
+// console.log(null<0);
+// console.log(null>=undefined);
+// console.log(undefined>=0);
+
+
+// console.log("Rohit">= "Mohit");
+// console.log("rohit">= "Mohit");
+// console.log("Rohit">= "mohit");
+// console.log("Mohit">= "mohit");
+
+
+// console.log(10>= "10");
+// console.log(10>"10");
+// console.log(10>"true");
+// console.log(10>true);
+// console.log(10>=true);
+// console.log(10<true);
+
+//Ek koi bhi type hai , usko agar mujhe compare karna hai dusre kisi type se
+//Dono number mein convert honge
+
+
+// console.log(null>="");
+// console.log(null>"");
+
+
+// console.log(NaN==NaN); //False
+
+
+
+
+
+
+
+
+
+
+
 
 
 
