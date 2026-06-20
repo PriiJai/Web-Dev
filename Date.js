@@ -46,6 +46,9 @@ console.log(date.toISOString());
 
 console.log(date);
 
+//Browser handles all these by themself if utc give it is given in the local curren time
+
+
 
 
 
