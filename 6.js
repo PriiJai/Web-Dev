@@ -73,10 +73,54 @@
 // console.log(arr3);
 
 
-const arr = [10,30,40,50,60,90,11];
-const arr4 = arr.splice(1,3,"Rohit",19);
-console.log(arr);  
-console.log(arr4);
+// const arr = [10,30,40,50,60,90,11];
+// const arr4 = arr.splice(1,3,"Rohit",19);// SPLICE IN ORGINAL 
+// console.log(arr);  
+// console.log(arr4);
+
+
+
+// const arr = [10,30,40,50,60,90,11];
+// const arr2 =["Pri" , 06, true];
+// // arr.push(arr2);
+// const arr3= arr.concat(arr2)
+// console.log(arr3);
+
+
+// const arr = [10,30,40,50,60,90,11];
+// const arr2 =["Pri" , 06, true];
+// const arr1 = [90,40,false]
+// const arr3= arr.concat(arr2,arr1)
+// console.log(arr3);
+
+
+
+// const arr = [10,30,40,50,60,90,11];
+// const arr1 =["Pri" ,6,true];
+// const arr2 = [90,40,false]
+// const arr3 = [arr,arr1,arr2]
+// //spread operator
+// const arr4=[...arr,...arr1,...arr2]
+// console.log(arr4);
+
+//ARRAY TO STRING
+// const names=["Pri", "Jai", "Kum","Sha"];
+//  console.log(names.toString());
+//  console.log(typeof names.toString());
+
+//  const names=["Pri", "Jai", "Kum","Sha"];
+// console.log(names.join());
+//  console.log(typeof names.join());
+//  console.log(names.join(" "));
+//  console.log(names.join("-"));
+
+//searching
+const names=["Pri", "Jai", "Kum","Sha"];
+console.log(names.indexOf("Jai"));
+console.log(names.indexOf("Bob"));
+
+
+
 
 
 
