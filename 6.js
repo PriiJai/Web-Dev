@@ -114,10 +114,85 @@
 //  console.log(names.join(" "));
 //  console.log(names.join("-"));
 
-//searching
-const names=["Pri", "Jai", "Kum","Sha"];
-console.log(names.indexOf("Jai"));
-console.log(names.indexOf("Bob"));
+// //searching
+// const names=["Pri", "Jai", "Kum","Sha"];
+// console.log(names.indexOf("Jai"));
+// console.log(names.indexOf("Bob"));
+// console.log(names.lastIndexOf("Jai"));
+// console.log(names.includes("Bob"));
+
+//sorting
+
+// const names=["Pri", "Jai", "Kum","Sha","Ria"];
+// console.log(names.sort());
+
+// const names=["Pri", "jai", "Kum","Sha","Ria"];
+// console.log(names.sort()); //small letters
+
+
+// //ascending order
+//  const names=["Pri", "Jai", "Kum","Sha","Ria"];
+//  console.log(names.reverse());
+
+//  //decending order
+// names.sort();
+// names.reverse();
+// console.log(names);
+
+
+//sorting is based on the ASCII basis
+// const a = [101,90,80,30,91];
+// a.sort();
+// console.log(a);
+
+// const a = [10,"Pri","Kar",true];
+// a.sort();
+// console.log(a);
+
+
+//normal sorting of numbers(ascending order)
+// const arr = [ 10 , 40 , 31, 71 , 53 , 11];
+// arr.sort((a,b)=> a-b); //this is one type of function for normal shorting
+// console.log(arr);
+// //-ve : a comes first
+// //+be:  b comes first
+
+
+// //decending order
+// const arr = [ 10 , 40 , 31, 71 , 53 , 11];
+// arr.sort((a,b)=> b-a); //reverse function
+// console.log(arr);
+
+//FLATTENING OF ARRAY
+// const arr=[10,30,50,[40,90,11],80];
+// console.log(arr);
+// console.log(arr[3]);
+// console.log(arr[4]);
+// console.log(arr[3][0]);
+// console.log(arr[3][1]);
+
+// const arr=[10,30,50,[40,90,[60,11,61],11],80];
+// console.log(arr);
+// console.log(arr[3]);
+// console.log(arr[3][1]);
+// console.log(arr[3][2]);
+// console.log(arr[3][2][0]);
+// console.log(arr[3][2][2]);
+
+// const arr=[10,30,50,[40,90,[60,11,61],11],80];
+// console.log(arr.flat());//1 level flat
+// console.log(arr.flat(2));//2 level flat
+// //infinite level
+// console.log(arr.flat(Infinity));
+
+//Array is not array in JS it bahaves like Objects
+
+
+const a = [11,343,434,"Pri",9.3,true];
+console.log(a["0"]);
+console.log(a["1"]);
+a.name="Ria";
+console.log(a);
 
 
 
