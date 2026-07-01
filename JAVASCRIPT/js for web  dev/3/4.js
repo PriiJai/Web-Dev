@@ -37,5 +37,5 @@ for (let child of parent.children){
 }
 
 
-//this is also not that much optimised so lets got to best method public 
+//this is also not that much optimised so lets got to best method bublling 
 //see in 5.js and 5.html
