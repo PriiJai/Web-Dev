@@ -62,6 +62,35 @@
 // console.log(data);
 
 //use await
-const reponse = await fetch ("https://api.github.com/users")
+// const reponse = await fetch ("https://api.github.com/users")
+// const data = await reponse.json();
+// console.log(data);
+
+
+
+//programs freezes here //there will be so many tasks that are independent of this so we have  to execute that instead of getting freez87
+// const reponse = await fetch ("https://api.github.com/users")
+// const data = await reponse.json();
+// console.log(data);
+
+// console.log("Hello guys");
+
+
+//js does not wait for anyone so we use async function
+//always use await with async function
+//await : waits for the task to complete
+
+async function github() {
+  console.log("Hello,This is me");
+  const reponse = await fetch ("https://api.github.com/users")
 const data = await reponse.json();
 console.log(data);
+  
+}
+
+github();
+console.log("Hello guys")
+
+
+
+
