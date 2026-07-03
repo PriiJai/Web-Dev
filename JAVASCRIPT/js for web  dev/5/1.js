@@ -205,7 +205,7 @@
 // const OrderDetail ={
 //   orderId: 123234,
 //   food: ("Pizza", "biryani","coke"),
-//   const: 620,
+//   cont: 620,
 //   customer_name : "Pri",
 //   custumer_location : "Dhanbad",
 //   retaurant_location:"Dhanbad"
@@ -277,7 +277,7 @@
 const OrderDetail ={
   orderId: 123234,
   food: ("Pizza","biryani","coke"),
-  const: 620,
+  cost: 620,
   customer_name : "Pri",
   custumer_location : "Dhanbad",
   retaurant_location:"Dhanbad"
