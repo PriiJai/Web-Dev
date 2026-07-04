@@ -313,3 +313,28 @@
 
 // user.greet();
 
+
+
+//this keyword: Global scope in Node JS
+//Windows: window object
+
+// console.log(this);
+
+
+//function: this keyword : if someone invoke the method oor function this will point that 
+//normal function : when no one is invoking it
+
+
+//strict mode:undefined
+//arrow function : it takes this from its lexical environment scope
+
+// function greet(){
+//   console.log(this);
+// }
+// greet();
+
+// 'use strict'
+// function greet(){
+//   console.log(this);
+// }
+// greet();
