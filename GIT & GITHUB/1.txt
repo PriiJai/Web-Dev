@@ -1,0 +1,17 @@
+GIT : Version Control system
+
+In a project we have some codes:
+-----------------------------------
+| const name = "Rohit"            |     
+| const age= 23;                  |
+| let balance = 240;              |
+|                                 |
+| function updatebalance(value){  |
+| baclance += value;              |
+|  }                              |
+|                                 |
+|                                 |
+-----------------------------------
+
+
+
