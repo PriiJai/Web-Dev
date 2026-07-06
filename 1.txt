@@ -13,5 +13,11 @@ In a project we have some codes:
 |                                 |
 -----------------------------------
 
+1: we updated the code and the website crashed: So the coder has t to revert back
+2:  Ownership of code: 
+
+Traker: That track the whole code...the project 
+(Tracker: Git) 
+
 
 
